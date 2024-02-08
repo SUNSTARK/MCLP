@@ -1,0 +1,18 @@
+Adam_optimizer:
+  initial_lr: 0.01
+  weight_decay: 1.0e-06
+Dataset:
+  num_locations: 2418
+  num_users: 7800
+  sequence_length: 20
+  topic_num: 400
+Embedding:
+  base_dim: 16
+Encoder:
+  encoder_type: lstm
+Model:
+  at_type: attn
+  batch_size: 256
+  epoch: 50
+  seed: 1234
+  test_epoch: 50

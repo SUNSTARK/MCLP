@@ -1,0 +1,7 @@
+numpy==1.23.2
+torch==2.1.0
+transformers==4.30.2
+tqdm==4.64.0
+yarm==0.2.2
+easydict==1.10
+gensim==4.3.2
