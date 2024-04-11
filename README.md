@@ -1,9 +1,9 @@
 # MCLP
 
-This is the pytorch implementation of paper "Going Where, by Whom, and at What Time: Next Location Prediction Considering User Preference and Temporal Regularity"
+This is the PyTorch implementation of the paper "Going Where, by Whom, and at What Time: Next Location Prediction Considering User Preference and Temporal Regularity"
 
 ## Parameter Analysis
-This is a supplementary for parameter analysis implemented on Traffic Camera Dataset.  
+This is a supplementary parameter analysis conducted on the Traffic Camera Dataset, exploring the effects of various dimensions, including location/time, user, and the number of Transformer encoder layers.
 
 ![Effect of Location Dimension](fig/lt_embedding.png)
 ![Effect of User Dimension](fig/user_embedding.png)
