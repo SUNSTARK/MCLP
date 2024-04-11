@@ -2,6 +2,13 @@
 
 This is the pytorch implementation of paper "Going Where, by Whom, and at What Time: Next Location Prediction Considering User Preference and Temporal Regularity"
 
+## Parameter Analysis
+This is a supplementary for parameter analysis implemented on Traffic Camera Dataset.  
+
+![Effect of Location Dimension](fig/lt_embedding.png)
+![Effect of User Dimension](fig/user_embedding.png)
+![Effect of num of layer](fig/num_layer.png)
+
 ## Requirements
 The runtime environment can be viewed in requirements.txt or by executing the following command:
 ```shell
