@@ -2,6 +2,13 @@
 
 This is the PyTorch implementation of the paper "Going Where, by Whom, and at What Time: Next Location Prediction Considering User Preference and Temporal Regularity"
 
+## Configurations
+For both datasets, the embedding dimensions of the proposed model are set to 16.  
+The Transformer encoder consists of 2 layers, each with 4 attention heads and a dropout rate of 0.1.  
+The Arrival Time Estimator has 4 attention heads.  
+We train MCLP for 50 epochs with a batch size of 256. 
+
+
 ## Parameter Analysis
 This is a supplementary parameter analysis conducted on the Traffic Camera Dataset, exploring the effects of various dimensions, including location/time, user, and the number of Transformer encoder layers.
 
