@@ -9,36 +9,22 @@ The Arrival Time Estimator has 4 attention heads.
 We train MCLP for 50 epochs with a batch size of 256. 
 
 ### Temporal Context on Mobility Entropy
-<div style="display:flex">
-    <div style="flex:35%;padding:5px;text-align:center;">
-        <img src="fig/entropy_avg.png" alt="Average" style="width:100%;">
-        <p style="margin-top:5px;">Average Calculation</p>
-    </div>
-    <div style="flex:35%;padding:5px;text-align:center;">
-        <img src="fig/entropy_freq.png" alt="Frequency" style="width:100%;">
-        <p style="margin-top:5px;">Frequency Calculation</p>
-    </div>
-</div>
+<p align="middle" width="100%">
+  <img src="fig/entropy_avg.png" width="35%" />
+  &nbsp; &nbsp;
+  <img src="fig/entropy_freq.png" width="35%" /> 
+</p>
 
 
 
 ### Parameter Analysis
 This is a supplementary parameter analysis conducted on the Traffic Camera Dataset, exploring the effects of various dimensions, including location/time, user, and the number of Transformer encoder layers.
 
-<div style="display:flex; text-align: center;">
-    <div style="flex:33.33%;padding:5px;">
-        <img src="fig/lt_embedding.png" alt="Effect of Location Dimension" style="width:100%;">
-        <p style="margin-top:5px;">Location/Time Dimension</p>
-    </div>
-    <div style="flex:33.33%;padding:5px;">
-        <img src="fig/user_embedding.png" alt="Effect of User Dimension" style="width:100%;">
-        <p style="margin-top:5px;">User Dimension</p>
-    </div>
-    <div style="flex:33.33%;padding:5px;">
-        <img src="fig/num_layer.png" alt="Effect of num of layer" style="width:100%;">
-        <p style="margin-top:5px;">Num. of Encoder Layer</p>
-    </div>
-</div>
+<p align="middle" width="100%">
+  <img src="fig/lt_embedding.png" width="32%" />
+  <img src="fig/user_embedding.png" width="32%" /> 
+  <img src="fig/num_layer.png" width="32%" />
+</p>
 
 
 ### Requirements
