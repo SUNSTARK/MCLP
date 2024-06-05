@@ -1,31 +1,17 @@
-# MCLP
+## MCLP
 
-This is the PyTorch implementation of the paper "Going Where, by Whom, and at What Time: Next Location Prediction Considering User Preference and Temporal Regularity"
+This is the PyTorch implementation of the Multi-Context aware Location Prediction model (MCLP) and helps readers to reproduce the results in the paper "**Going Where, by Whom, and at What Time: Next Location Prediction Considering User Preference and Temporal Regularity**".
+
+* Model Framework
+<p align="middle" width="100%">
+  <img src="fig/framework.png" width="60%"/>
+</p>
 
 ### Configurations
 For both datasets, the embedding dimensions of the proposed model are set to 16.  
 The Transformer encoder consists of 2 layers, each with 4 attention heads and a dropout rate of 0.1.  
 The Arrival Time Estimator has 4 attention heads.  
 We train MCLP for 50 epochs with a batch size of 256. 
-
-### Temporal Context on Mobility Entropy
-<p align="middle" width="100%">
-  <img src="fig/entropy_avg.png" width="35%" />
-  &nbsp; &nbsp;
-  <img src="fig/entropy_freq.png" width="35%" /> 
-</p>
-
-
-
-### Parameter Analysis
-This is a supplementary parameter analysis conducted on the Traffic Camera Dataset, exploring the effects of various dimensions, including location/time, user, and the number of Transformer encoder layers.
-
-<p align="middle" width="100%">
-  <img src="fig/lt_embedding.png" width="32%" />
-  <img src="fig/user_embedding.png" width="32%" /> 
-  <img src="fig/num_layer.png" width="32%" />
-</p>
-
 
 ### Requirements
 The runtime environment can be viewed in requirements.txt or by executing the following command:
@@ -73,3 +59,13 @@ For example, `saved_models/TC/settings.yml` contains hyperparameter settings of 
   ```shell
   python ./model/run.py --dataset TC --dim 16 --at truth
   ```
+  
+
+### Parameter Analysis
+This is a supplementary parameter analysis conducted on the Traffic Camera Dataset, exploring the effects of various dimensions, including location/time, user, and the number of Transformer encoder layers.
+
+<p align="middle" width="100%">
+  <img src="fig/lt_embedding.png" width="32%" />
+  <img src="fig/user_embedding.png" width="32%" /> 
+  <img src="fig/num_layer.png" width="32%" />
+</p>
