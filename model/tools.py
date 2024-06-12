@@ -48,7 +48,7 @@ def custom_collate(batch, device, config):
     }
 
     if config.Dataset.topic_num > 0:
-        batch_dict['user_topic_loc'] = torch.stack([torch.tensor(item['user_topic_loc']) for item in batch]).to(device)
+        batch_dict['user_topic_loc'] = torch.stack([torch.tensor(item['user_topic_loc'], dtype=torch.float32) for item in batch]).to(device)
 
     return batch_dict
 
