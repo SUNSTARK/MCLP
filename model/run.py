@@ -3,9 +3,12 @@ import os
 import time
 
 import torch
+from torch.utils.data import DataLoader
 from transformers import get_linear_schedule_with_warmup
 
-from tools import get_config, run_test, train_epoch, save_checkpoint, initial_train, get_mapper, update_config
+from dataloader import MyDataset
+from framework import MyModel
+from tools import get_config, run_test, train_epoch, get_mapper, update_config, custom_collate
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--gpu", type=str, default="0")
@@ -45,7 +48,18 @@ if __name__ == '__main__':
     update_config(config_path, key_list=['Model', 'epoch'], value=args.epoch)
     config = get_config(config_path, easy=True)
 
-    dataloader, model, optimizer, loss_fn = initial_train(config, dataset_path, device)
+    dataset = MyDataset(config=config, dataset_path=dataset_path, device=device, load_mode='train')
+    batch_size = config.Model.batch_size
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=0, drop_last=True,
+                            collate_fn=lambda batch: custom_collate(batch, device, config))
+    model = MyModel(config)
+    model.to(device)
+    loss_fn = torch.nn.CrossEntropyLoss(reduction="mean")
+    total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    print(f"Total training samples: {len(dataloader) * batch_size} | Total trainable parameters: {total_params}")
+    optimizer = torch.optim.Adam(model.parameters(), lr=config.Adam_optimizer.initial_lr,
+                                         weight_decay=config.Adam_optimizer.weight_decay)
+
     print(f"Dataset: {args.dataset} | Device: {device} | Model: {config.Encoder.encoder_type}")
     print(f"AT type: {config.Model.at_type} | topic_num: {config.Dataset.topic_num} | dim: {config.Embedding.base_dim}")
 

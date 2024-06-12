@@ -36,6 +36,21 @@ def get_user_input():
         else:
             print("Invalid Options")
 
+def custom_collate(batch, device, config):
+    batch_dict = {
+        'user': torch.tensor([item['user'] for item in batch]).to(device),
+        'location_x': torch.stack([torch.tensor(item['location_x']) for item in batch]).to(device),
+        'hour': torch.stack([torch.tensor(item['hour']) for item in batch]).to(device),
+        'location_y': torch.tensor([item['location_y'] for item in batch]).to(device),
+        'timeslot_y': torch.tensor([item['timeslot_y'] for item in batch]).to(device),
+        'hour_mask': torch.stack([torch.tensor(item['hour_mask']) for item in batch]).to(device),
+        'prob_matrix_time_individual': torch.stack([torch.tensor(item['prob_matrix_time_individual']) for item in batch]).to(device),
+    }
+
+    if config.Dataset.topic_num > 0:
+        batch_dict['user_topic_loc'] = torch.stack([torch.tensor(item['user_topic_loc']) for item in batch]).to(device)
+
+    return batch_dict
 
 def update_config(path, key_list, value):
     """
@@ -124,7 +139,7 @@ def run_test(dataset_path, model_path, model, device, epoch, test_only):
     dataset = MyDataset(config=config, dataset_path=dataset_path, device=device, load_mode='test')
 
     batch_size = config.Model.batch_size
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=False, num_workers=0, drop_last=True)
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=False, num_workers=0, drop_last=True, collate_fn=lambda batch: custom_collate(batch, device, config))
     print('Test batches:', len(dataloader))
 
     if test_only:
@@ -189,25 +204,6 @@ def run_test(dataset_path, model_path, model, device, epoch, test_only):
 
     with open(os.path.join(model_path, 'results.txt'), 'a', encoding='utf8') as res_file:
         res_file.write(result_str + '\n\n')
-
-
-def initial_train(config, dataset_path, device):
-    dataset = MyDataset(config=config, dataset_path=dataset_path, device=device, load_mode='train')
-
-    batch_size = config.Model.batch_size
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=0, drop_last=True)
-
-    model = MyModel(config)
-    model.to(device)
-
-    loss_fn = torch.nn.CrossEntropyLoss(reduction="mean")
-
-    total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    print(f"Total training samples: {len(dataloader) * batch_size} | Total trainable parameters: {total_params}")
-
-    optimizer_initial = torch.optim.Adam(model.parameters(), lr=config.Adam_optimizer.initial_lr,
-                                         weight_decay=config.Adam_optimizer.weight_decay)
-    return dataloader, model, optimizer_initial, loss_fn
 
 
 def train_epoch(model, dataloader, optimizer, loss_fn, scheduler):

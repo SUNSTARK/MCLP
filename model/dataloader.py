@@ -37,15 +37,6 @@ class MyDataset(Dataset):
 
     def __getitem__(self, idx):
         data = self.data[idx]
-        data['user'] = torch.as_tensor(data['user']).to(self.device)
-        data['location_x'] = torch.as_tensor(data['location_x']).to(self.device)
-        data['hour'] = torch.as_tensor(data['hour']).to(self.device)
-        data['location_y'] = torch.as_tensor(data['location_y'], dtype=torch.long).to(self.device)
-        data['timeslot_y'] = torch.as_tensor(data['timeslot_y'], dtype=torch.long).to(self.device)
-        data['hour_mask'] = torch.as_tensor(data['hour_mask']).to(self.device)
-        data['prob_matrix_time_individual'] = torch.as_tensor(data['prob_matrix_time_individual'], dtype=torch.float32).to(self.device)
-        if self.config.Dataset.topic_num > 0:
-            data['user_topic_loc'] = torch.as_tensor(data['user_topic_loc'], dtype=torch.float32).to(self.device)
 
         return data
 
