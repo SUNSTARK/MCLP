@@ -59,13 +59,3 @@ For example, `saved_models/TC/settings.yml` contains hyperparameter settings of 
   ```shell
   python ./model/run.py --dataset TC --dim 16 --at truth
   ```
-  
-
-### Parameter Analysis
-This is a supplementary parameter analysis conducted on the Traffic Camera Dataset, exploring the effects of various dimensions, including location/time, user, and the number of Transformer encoder layers.
-
-<p align="middle" width="100%">
-  <img src="fig/lt_embedding.png" width="32%" />
-  <img src="fig/user_embedding.png" width="32%" /> 
-  <img src="fig/num_layer.png" width="32%" />
-</p>
