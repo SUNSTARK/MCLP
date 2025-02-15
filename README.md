@@ -36,26 +36,13 @@ For example, `saved_models/TC/settings.yml` contains hyperparameter settings of 
   ```shell
   python ./model/run.py --dataset TC --dim 16 --topic 400 --at attn --encoder lstm
   ```
-#### Study of Different Variants:
-- For Base model:
-  ```shell
-  python ./model/run.py --dataset TC --dim 16
-  ```
-- For +Pre model:
-  ```shell
-  python ./model/run.py --dataset TC --dim 16 --topic 400
-  ```
-- For +At model :
-  ```shell
-  python ./model/run.py --dataset TC --dim 16 --at attn
-  ```
-
-#### Study of Different Arrival Time Estimators:
-- For Static model :
-  ```shell
-  python ./model/run.py --dataset TC --dim 16 --at static
-  ```
-- For True model :
-  ```shell
-  python ./model/run.py --dataset TC --dim 16 --at truth
-  ```
+### Citation
+```
+@inproceedings{sun2024going,
+  title={Going Where, by Whom, and at What Time: Next Location Prediction Considering User Preference and Temporal Regularity},
+  author={Sun, Tianao and Fu, Ke and Huang, Weiming and Zhao, Kai and Gong, Yongshun and Chen, Meng},
+  booktitle={Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining},
+  pages={2784--2793},
+  year={2024}
+}
+```
